@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  api-catalogo:
+    container_name: ${APP_NAME}_catalogo
+    build:
+      context: ./api-catalogo
+    ports:
+      - ${CATALOGO_PORT}:3000
+    volumes:
+      - ./api-catalogo:/usr/src/app
+      - ./api-catalogo/node_modules
+    tty: true
+    depends_on:
+      - db-mysql
+      - cache-redis
+
+  db-mysql:
+    container_name: ${APP_NAME}_db
+    image: mysql:${MYSQL_VERSION}
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_DATABASE:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
+    tty: true
+
+  cache-redis:
+    container_name: ${APP_NAME}_cache
+    image: redis:${REDIS_VERSION}
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - ./.docker/redis:/data
+    tty: true
