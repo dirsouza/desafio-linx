@@ -35,7 +35,7 @@ export class Category extends BaseEntity implements CategoryDto {
   })
   updated_at: Date;
 
-  @ManyToOne(type => Product, product => product.categories, {
+  @ManyToOne(() => Product, product => product.categories, {
     nullable: false
   })
   product: Product;

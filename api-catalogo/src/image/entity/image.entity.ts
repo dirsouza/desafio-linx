@@ -43,7 +43,7 @@ export class Image extends BaseEntity implements ImageDto {
   })
   updated_at: Date;
 
-  @ManyToOne(type => Product, product => product.images, {
+  @ManyToOne(() => Product, product => product.images, {
     nullable: false
   })
   product: Product;

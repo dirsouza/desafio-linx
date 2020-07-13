@@ -4,13 +4,15 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  BaseEntity
 } from "typeorm";
 import { Category } from "../../category/entity/category.entity";
 import { Image } from "../../image/entity/image.entity";
+import { ProductDto } from "../dto/product.dto";
 
 @Entity('products')
-export class Product {
+export class Product extends BaseEntity implements ProductDto {
 
   @PrimaryColumn('varchar')
   id: string;
@@ -74,14 +76,14 @@ export class Product {
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at: Date;
 
-  @OneToMany(type => Category, category => category.product, {
+  @OneToMany(() => Category, category => category.product, {
     cascade: true,
     onDelete: "CASCADE",
     nullable: false
   })
   categories: Category[];
 
-  @OneToMany(type1 => Image, image => image.product, {
+  @OneToMany(() => Image, image => image.product, {
     cascade: true,
     onDelete: "CASCADE",
     nullable: false
