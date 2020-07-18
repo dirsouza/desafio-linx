@@ -1,19 +1,18 @@
-import { Module, CacheModule } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { Module, CacheModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import * as redisStore from 'cache-manager-redis-store';
-import { parseToInt, parseTypeDB } from "./utils";
-import { Product } from "./product/entity/product.entity";
-import { Category } from "./category/entity/category.entity";
-import { Image } from "./image/entity/image.entity";
+import { parseToInt, parseTypeDB } from './utils';
+import { Product } from './product/product.entity';
+import { Category } from './category/category.entity';
+import { Image } from './image/image.entity';
 import { ProductModule } from './product/product.module';
-import { SeederModule } from './seeder/seeder.module';
+import { CategoryModule } from "./category/category.module";
+import { ImageModule } from "./image/image.module";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: parseTypeDB(process.env.DB_TYPE),
       host: process.env.DB_HOST,
@@ -22,8 +21,6 @@ import { SeederModule } from './seeder/seeder.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [Product, Category, Image],
-      charset: 'utf8mb4_unicode_ci',
-      synchronize: true,
       logging: ['error'],
       autoLoadEntities: true,
     }),
@@ -34,7 +31,8 @@ import { SeederModule } from './seeder/seeder.module';
       ttl: parseToInt(process.env.CACHE_TTL) || 6,
     }),
     ProductModule,
-    SeederModule,
+    CategoryModule,
+    ImageModule
   ],
 })
 export class AppModule {}
