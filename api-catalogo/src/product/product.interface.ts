@@ -1,7 +1,7 @@
 import { ICategory } from '../category/category.interface';
 import { IImage } from '../image/image.interface';
 
-export class IProduct {
+export interface IProduct {
   id: string;
   name: string;
   description: string;
