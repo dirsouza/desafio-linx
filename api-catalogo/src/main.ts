@@ -25,7 +25,7 @@ async function bootstrap() {
       app,
       new DocumentBuilder()
         .setTitle('API Catalogo')
-        .setDescription('Api para fornecer dados do Catalogo')
+        .setDescription('API para fornecer dados do Catalogo')
         .setVersion('1.0')
         .build(),
     ),
