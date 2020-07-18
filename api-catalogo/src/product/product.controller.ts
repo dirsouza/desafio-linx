@@ -13,8 +13,8 @@ export class ProductController {
   @ApiQuery({ name: 'format', enum: Format })
   @ApiOkResponse({ type: ProductDto })
   getProductById(
-    @Param("id") id: number,
-    @Query("format") format: string = 'complete'
+    @Param('id') id: number,
+    @Query('format') format: string = 'complete'
   ): Promise<ProductDto> {
     return this.productService.findProductById(id, format);
   }
