@@ -14,7 +14,7 @@ export class ProductController {
   @ApiOkResponse({ type: ProductDto })
   getProductById(
     @Param('id') id: number,
-    @Query('format') format: string = 'complete'
+    @Query('format') format = 'complete'
   ): Promise<ProductDto> {
     return this.productService.findProductById(id, format);
   }
