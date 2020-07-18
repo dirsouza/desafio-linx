@@ -2,6 +2,7 @@ import { Module, CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
 import { parseToInt } from './utils';
+import { MicroserviceModule } from './microservice/microservice.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { parseToInt } from './utils';
       port: parseToInt(process.env.CACHE_PORT) || 6379,
       ttl: parseToInt(process.env.CACHE_TTL) || 6,
     }),
+    MicroserviceModule,
   ],
 })
 export class AppModule {}
