@@ -1,7 +1,7 @@
 import { Module, CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as redisStore from 'cache-manager-redis-store';
-import { parseToInt, parseTypeDB } from './utils';
+import { parseToInt } from './utils';
 
 @Module({
   imports: [
