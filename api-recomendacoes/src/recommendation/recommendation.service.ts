@@ -48,16 +48,14 @@ export class RecommendationService {
             throw err;
           });
 
-        if (prod !== '') {
+        if (
+          prod !== '' &&
+          prod?.status === 'AVAILABLE' ||
+          prod?.status === 'available'
+        ) {
           products.push(prod as ProductDto);
         }
       }
-
-      Object.assign([],
-        products.map(prod =>
-          prod.status === 'AVAILABLE' || prod.status === 'available'
-        )
-      )
 
       return products
         .splice(0, maxProducts >= 10 ? maxProducts : 10);
