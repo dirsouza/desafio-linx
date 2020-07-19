@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+  api-recomendacao:
+    container_name: ${APP_NAME}_recomendacao
+    build:
+      context: ./api-recomendacoes
+    ports:
+      - ${RECOMENDACAO_PORT}:3001
+    volumes:
+      - ./api-recomendacoes:/usr/src/app
+    tty: true
+    depends_on:
+      - api-catalogo
+
   api-catalogo:
     container_name: ${APP_NAME}_catalogo
     build:
@@ -9,7 +21,6 @@ services:
       - ${CATALOGO_PORT}:3000
     volumes:
       - ./api-catalogo:/usr/src/app
-      - ./api-catalogo/node_modules
     tty: true
     depends_on:
       - db-mysql
