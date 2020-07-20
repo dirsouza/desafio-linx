@@ -7,8 +7,6 @@ services:
       context: ./api-recomendacoes
     ports:
       - ${RECOMENDACAO_PORT}:3001
-    volumes:
-      - ./api-recomendacoes:/usr/src/app
     tty: true
     depends_on:
       - api-catalogo
@@ -19,18 +17,26 @@ services:
       context: ./api-catalogo
     ports:
       - ${CATALOGO_PORT}:3000
-    volumes:
-      - ./api-catalogo:/usr/src/app
     tty: true
     depends_on:
-      - db-mysql
+      - db-script
       - cache-redis
+
+  db-script:
+    container_name: ${APP_NAME}_db-script
+    build:
+      context: ./db-script
+    tty: true
+    entrypoint: dockerize -wait tcp://db-mysql:3306 -timeout 40s yarn start
+    depends_on:
+      - db-mysql
 
   db-mysql:
     container_name: ${APP_NAME}_db
     image: mysql:${MYSQL_VERSION}
     ports:
       - ${MYSQL_PORT}:3306
+    command: --innodb-use-native-aio=0
     environment:
       MYSQL_DATABASE:
       MYSQL_USER:
