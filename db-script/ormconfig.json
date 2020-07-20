@@ -1,0 +1,20 @@
+{
+   "type": "mysql",
+   "host": "db-mysql",
+   "port": 3306,
+   "username": "linx",
+   "password": "linx",
+   "database": "linx",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "src/entity/**/*.ts"
+   ],
+   "migrations": [
+      "src/migration/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration"
+   }
+}
