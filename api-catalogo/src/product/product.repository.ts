@@ -20,19 +20,4 @@ export class ProductRepository extends Repository<Product> {
       throw e;
     }
   }
-
-  async createProduct(productDto: ProductDto): Promise<(ProductDto & Product) | null> {
-    try {
-      return this.findOne(productDto.id)
-        .then(async (res) => {
-          if (res) return null;
-          return await this.save(productDto);
-        })
-        .catch((error) => {
-          throw error;
-        });
-    } catch (e) {
-      throw e;
-    }
-  }
 }

@@ -11,14 +11,6 @@ export class ImageService {
     this.imageRepository = connection.getCustomRepository(ImageRepository);
   }
 
-  async createImage(imageDto: ImageDto): Promise<ImageDto> {
-    try {
-      return await this.imageRepository.createImage(imageDto);
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async findImageByProduct(id: number): Promise<ImageDto[]> {
     try {
       return await this.imageRepository.findByProduct(id);

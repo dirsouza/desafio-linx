@@ -4,14 +4,6 @@ import { ImageDto } from './image.dto';
 
 @EntityRepository(Image)
 export class ImageRepository extends Repository<Image> {
-  async createImage(imageDto: ImageDto): Promise<ImageDto> {
-    try {
-      return await this.save(imageDto);
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async findByProduct(id: number): Promise<ImageDto[]> {
     try {
       return await this.find({

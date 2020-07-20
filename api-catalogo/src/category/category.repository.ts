@@ -4,14 +4,6 @@ import { CategoryDto } from './category.dto';
 
 @EntityRepository(Category)
 export class CategoryRepository extends Repository<Category> {
-  async createCategory(categoryDto: CategoryDto): Promise<CategoryDto> {
-    try {
-      return await this.save(categoryDto);
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async findByProduct(id: number): Promise<CategoryDto[]> {
     try {
       return await this.find({

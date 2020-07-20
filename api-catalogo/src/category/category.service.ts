@@ -13,14 +13,6 @@ export class CategoryService {
     );
   }
 
-  async createCategory(categoryDto: CategoryDto): Promise<CategoryDto> {
-    try {
-      return await this.categoryRepository.createCategory(categoryDto);
-    } catch (e) {
-      throw e;
-    }
-  }
-
   async findCategoryByProduct(id: number): Promise<CategoryDto[]> {
     try {
       return await this.categoryRepository.findByProduct(id);
