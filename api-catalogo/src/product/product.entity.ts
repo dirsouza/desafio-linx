@@ -82,15 +82,11 @@ export class Product extends BaseEntity implements ProductDto {
   updatedAt: Date;
 
   @OneToMany(() => Category, (category) => category.product, {
-    cascade: true,
-    onDelete: 'CASCADE',
     nullable: false,
   })
   categories: Category[];
 
   @OneToMany(() => Image, (image) => image.product, {
-    cascade: true,
-    onDelete: 'CASCADE',
     nullable: false,
   })
   images: Image[];

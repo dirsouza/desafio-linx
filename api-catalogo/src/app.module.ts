@@ -22,6 +22,15 @@ import { ImageModule } from "./image/image.module";
       database: process.env.DB_DATABASE,
       entities: [Product, Category, Image],
       logging: ['error'],
+      cache: {
+        type: 'redis',
+        options: {
+          host: process.env.CACHE_HOST,
+          port: parseToInt(process.env.CACHE_PORT) || 6379,
+        },
+        alwaysEnabled: true,
+        duration: 6000,
+      },
       autoLoadEntities: true,
     }),
     CacheModule.register({
